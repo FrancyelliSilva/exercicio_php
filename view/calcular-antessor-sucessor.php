@@ -7,8 +7,8 @@
                 <div class="text-end">
                     <button type="submit" name="confirmar" class="btn btn-sm btn-outline-success mt-2">Confirmar</button>
                 </div>
-                    <div class="mt-2">ANTECESSOR: <?php echo $antecessor; ?></div>
-                    <div class="mt-2">SUCESSOR: <?php echo $sucessor; ?></div>                
+                    <div class="mt-2">Antecessor: <?php echo $antecessor; ?></div>
+                    <div class="mt-2">Sucessor: <?php echo $sucessor; ?></div>                
             </form>
         </div>
     </div>
