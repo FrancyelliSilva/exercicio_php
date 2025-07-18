@@ -9,8 +9,8 @@ class Controller {
     }
 
     public function index() {
-        $antecessor = $sucessor = $numero = '';
 
+        $antecessor = $sucessor = $numero = '';
         if(isset($_POST['confirmar']) && isset($_POST['numero'])) {
             $numero = $_POST['numero'];
             $resultado = $this->model->calcularAntecessorSucessor($numero);
@@ -28,5 +28,30 @@ class Controller {
             $mensagem_sorteio = $result['mensagem'];
         }
         require_once 'view/adivinhe-numero.php';
+
+        // ---Conversor do Real ---
+        $dolarConvertido = '';
+        $euroConvertido = '';
+        $conversao_error = ''; // Para exibir mensagens de erro da conversão
+
+        if (isset($_POST['converter_moeda'])) { // Usei 'converter_moeda' como o nome do botão de submit
+            $real = $_POST['real'] ?? '';
+
+            if (!is_numeric($real) || $real < 0) {
+                $conversao_error = "Por favor, digite um valor numérico positivo para o Real.";
+            } else {
+                $real = (float) $real;
+                $resultadoConversao = $this->model->converterReal($real);
+
+                if (isset($resultadoConversao['error'])) {
+                    $conversao_error = $resultadoConversao['error'];
+                } else {
+                    $dolarConvertido = round($resultadoConversao['dolar'], 2);
+                    $euroConvertido = round($resultadoConversao['euro'], 2);
+                }
+            }
+        }
+
+        require_once 'view/conversor-dolar.php';
     }
 }
